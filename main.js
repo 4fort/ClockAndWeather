@@ -125,6 +125,8 @@ function showError(error) {
     weatherNotif.innerHTML = `<p> ${error.message}`
 }
 
+// weather display
+
 function getWeather(latitude, longitude) {
     let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherKey}`;
     console.log(api);
@@ -151,11 +153,11 @@ function displayWeather() {
 
     if (button.checked == true) {
         weather.temperature.value = Math.round((weather.temperature.value - 32) / 1.8);
-        weatherIcon.innerHTML = `<img src="weatherIcons/${weather.iconId}.png"> ${weather.temperature.value}°C`;
+        weatherIcon.innerHTML = `<img src="weatherIcons/${weather.iconId}.png"> ${weather.temperature.value.toLocaleString(undefined, {style: 'unit', unit: 'celsius'})}`;
     }
     else {
         weather.temperature.value = Math.round((weather.temperature.value * 1.8) + 32);
-        weatherIcon.innerHTML = `<img src="weatherIcons/${weather.iconId}.png"> ${weather.temperature.value}°F`;
+        weatherIcon.innerHTML = `<img src="weatherIcons/${weather.iconId}.png"> ${weather.temperature.value.toLocaleString(undefined, {style: 'unit', unit: 'fahrenheit'})}`;
     }
 
     // weatherTemp.innerHTML = `${weather.temperature.value}° <span>C</span>`;
