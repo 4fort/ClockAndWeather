@@ -11,35 +11,45 @@
 <body>
     <div class="container">
         
+        <!-- DATE AND WEATHER -->
         <div class="date">
-            <span class="day">-day</span>
-            <span class="month">-month -date, -year</span>
+            <div class="dateContainer">
+                <span class="day">-day</span>
+                <span class="month">-month -date, -year</span>
+            </div>
 
             <div class="weather">
                 <div class="weatherNotification"></div>
                 <div class="weatherContainer">
+
+                    <div class="">
+                        <div class="weatherTempDesc" style="text-transform: capitalize;">   <!-- Weather Temp Description -->
+                            <p>-</p>
+                        </div>
+                        
+                        <span class="weatherTempUnit">C</span>
+    
+                        <div class="weatherLocation">   <!-- Weather Location -->
+                            <p>-</p>
+                        </div>
+
+                        <div class="tempUnitToggle">
+                            <label for="btnWeatherUnit" class="switch">
+                                <input type="checkbox" id="btnWeatherUnit" onclick="displayWeather()">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
                     <div class="weatherIcon">   <!-- Weather Icon -->
-                        <img src="weatherIcons/unknown.png" alt=""> <span class="weatherTempUnit">C</span>
-                    </div>
-
-                    <!-- <div class="weatherTempValue"> 
-                        <p>- °<span class="weatherUnit">C</span></p>
-                    </div> -->
-
-                    <div class="weatherTempDesc" style="text-transform: capitalize;">   <!-- Weather Temp Description -->
-                        <p>-</p>
-                    </div>
-                    <div class="weatherLocation">   <!-- Weather Location -->
-                        <p>-</p>
+                        <img src="weatherIcons/unknown.svg" alt="">
                     </div>
                 </div>
             </div>
 
-            <div class="checkBoxes">
-                <input type="checkbox" id="btnWeatherUnit" onclick="displayWeather()">
-            </div>
+            
 
-            <span>By Dexter Fort Silva</span>
+            <span class="madeBy">By Dexter Fort Silva</span>
 
         </div>
 

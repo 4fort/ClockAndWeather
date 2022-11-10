@@ -82,14 +82,23 @@ setInterval(() => {
     days.innerHTML = formatDay(date);
     months.innerHTML = formatMonth(date);
 
-})
+    // Alarm
+    if(m == 57){
+        console.log('it worked!' + s)
+    }
+
+    if(s == 60){
+        getWeather();
+    }
+
+},1000)
 
 
 // Weather
 // api 610a95f5a7c903124a7c9476bcc0a881
 
 const weatherIcon = document.querySelector('.weatherIcon');
-const weatherTemp = document.querySelector('.weatherTempValue');
+const weatherTemp = document.querySelector('.weatherTempUnit');
 const weatherDesc = document.querySelector('.weatherTempDesc');
 const weatherLocation = document.querySelector('.weatherLocation');
 const weatherNotif = document.querySelector('.weatherNotification');
@@ -98,8 +107,6 @@ const weather = {};
 weather.temperature = {
     unit: 'celsius'
 };
-
-const KELVIN = 273;
 
 const weatherKey = '610a95f5a7c903124a7c9476bcc0a881';
 
@@ -111,11 +118,13 @@ else {
     weatherNotif.innerHTML = `<p> Browser doesn't support Geolocalization`;
 }
 
+var latitude;
+var longitude;
 function setPosition(position) {
-    let latitude = position.coords.latitude;
-    let longitude = position.coords.longitude;
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
 
-    getWeather(latitude, longitude);
+    getWeather();
 }
 
 // weather error handling
@@ -126,47 +135,111 @@ function showError(error) {
 }
 
 // weather display
+var KELVIN = 273;
 
-function getWeather(latitude, longitude) {
+let tempUnitToggle_btn = document.getElementById('btnWeatherUnit');
+
+setTimeout(() => {
+    getWeather();
+},60000)
+function getWeather() {
     let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${weatherKey}`;
     console.log(api);
     
     fetch(api)
-    .then(function(response){
+    .then((response) => {
         let data = response.json();
         return data;
     })
-    .then(function(data){
-        weather.temperature.value = Math.round(data.main.temp - KELVIN);
+    .then((data) => {
+        weather.temperature.valueC = Math.round(data.main.temp - KELVIN);
+        weather.temperature.valueF = Math.round((data.main.temp - KELVIN) * 1.8 + 32);
         weather.description = data.weather[0].description;
         weather.iconId = data.weather[0].icon;
         weather.city = data.name;
         weather.country = data.sys.country;
     })
-    .then(function(){
+    .then(() => {
         displayWeather();
     });
 }
 
 function displayWeather() {
-    let button = document.getElementById('btnWeatherUnit');
+    tempUnitToggle_btn.parentElement.style.pointerEvents = 'all';
 
-    if (button.checked == true) {
-        weather.temperature.value = Math.round((weather.temperature.value - 32) / 1.8);
-        weatherIcon.innerHTML = `<img src="weatherIcons/${weather.iconId}.png"> ${weather.temperature.value.toLocaleString(undefined, {style: 'unit', unit: 'celsius'})}`;
+    if (tempUnitToggle_btn.checked) {
+        weatherTemp.innerHTML = ` ${weather.temperature.valueF.toLocaleString(undefined, {style: 'unit', unit: 'fahrenheit'})}`;
     }
     else {
-        weather.temperature.value = Math.round((weather.temperature.value * 1.8) + 32);
-        weatherIcon.innerHTML = `<img src="weatherIcons/${weather.iconId}.png"> ${weather.temperature.value.toLocaleString(undefined, {style: 'unit', unit: 'fahrenheit'})}`;
+        weatherTemp.innerHTML = `${weather.temperature.valueC.toLocaleString(undefined, {style: 'unit', unit: 'celsius'})}`;
     }
 
     // weatherTemp.innerHTML = `${weather.temperature.value}° <span>C</span>`;
+    weatherIcon.innerHTML = `<img src="http://www.gstatic.com/images/icons/material/apps/weather/2x/${weatherIconUpdater()}_dark_color_96dp.png">`;
     weatherDesc.innerHTML = weather.description;
     weatherLocation.innerHTML = `${weather.city}, ${weather.country}`;
 
-    // Buttons
-    
-
 }
+const weatherIconUpdater = () => {
+    let weatherIconPath;
+    switch (weather.iconId) {
 
-console.log((weather.temperature.value * 1.8) + 32);
+        case '01d':
+            return weatherIconPath = 'sunny';
+            break;
+        case '01n':
+            return weatherIconPath = 'clear_night'
+            break;
+
+        case '02d':
+            return weatherIconPath = 'mostly_sunny';
+            break;
+        case '02n':
+            return weatherIconPath = 'mostly_clear_night';
+            break;
+
+        case '03d':
+            return weatherIconPath = 'partly_cloudy';
+            break;
+        case '03n':
+            return weatherIconPath = 'partly_cloudy_night';
+            break;
+
+        case '04d':
+            return weatherIconPath = 'mostly_cloudy_day';
+            break;
+        case '04n':
+            return weatherIconPath = 'mostly_cloudy_night';
+            break;
+
+        case '09d', '09n':
+            return weatherIconPath = 'heavy_rain';
+            break;
+
+        case '10d':
+            return weatherIconPath = 'scattered_showers_day';
+            break;
+        case '10n':
+            return weatherIconPath = 'scattered_showers_night';
+            break;
+
+        case '11d':
+            return weatherIconPath = 'strong_tstorms';
+            break;
+        case '11n':
+            return weatherIconPath = 'isolated_scattered_tstorms_day';
+            break;
+
+        case '13d', '13n':
+            return weatherIconPath = 'snow_showers_snow';
+            break;
+
+        case '50d', '50n':
+            return weatherIconPath = 'haze_fog_dust_smoke';
+            break;
+
+        case 'undefined':
+            return weatherIconPath = 'cloudy';
+            break;
+    }
+}
