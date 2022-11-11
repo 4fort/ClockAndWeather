@@ -9,6 +9,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 <body>
+    <div class="alarm_Alert">
+        <div class="alertContainer">
+            <div id="alarm_AlertDetails">
+                <h3>alarmName</h3>
+                <h1>11:49 PM</h1>
+            </div>
+
+            <span onclick="stopAlarm()">Stop</span>
+            <span onclick="snoozeAlarm()">Snooze</span>
+        </div>
+    </div>
+
     <div class="container">
         
         <!-- DATE AND WEATHER -->
@@ -102,12 +114,35 @@
 
         </div>
         
+        <div class="alarm">
+            <span>Alarm</span>
 
+            <form action="" id="alarm">
+                <div class="alarm_Inputs">
+                    <input name="alarm_Name" id="alarm_Name" type="text" autocomplete="off">
+                    <!-- <label for="alarm_Hours">Hours</label> -->
+                    <select name="alarm_Hours" id="alarm_Hours"></select>
+                        
+                    <!-- <label for="alarm_Minutes">Minutes</label> -->
+                    <select name="alarm_Minutes" id="alarm_Minutes"></select>
+
+                    <select name="alarm_AmPm" id="alarm_AmPm">
+                        <option value="am">AM</option>
+                        <option value="pm">PM</option>
+                    </select>
+                </div>
+               
+                <button type="submit">Add</button>
+            </form>
+
+            <div id="alarm_List"></div>
+        </div>
         
 
     </div>
 
     <script src="main.js" defer></script>
+    <script src="alarm.js" defer></script>
 
 </body>
 </html>

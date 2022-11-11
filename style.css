@@ -11,7 +11,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
-html, body {
+body {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,6 +21,16 @@ html, body {
     background-repeat: no-repeat;
     background-size: cover;
     /* animation: bg 1s ease-in-out; */
+}
+
+::-webkit-scrollbar {
+    opacity: 0;
+    width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffffff77;
+    border-radius: 25px;
 }
 
 @keyframes bg {
@@ -241,14 +251,14 @@ html, body {
     /* position: relative; */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     margin-left: 30px;
     height: 100%;
     width: 480px;
 }
 
 .dateContainer {
-    line-height: 40px;
+    line-height: 50px;
 }
 
 .day {
@@ -352,4 +362,166 @@ input:checked + .slider {
 
 input:checked + .slider::before {
     transform: translateX(69%);
+}
+
+.alarm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 480px;
+    height: 80%;
+    margin-right: 30px;
+    /* background: #ffffff33;
+    backdrop-filter: blur(20px);
+    box-shadow: 0px 6px 20px 0px #00000038; */
+    border-radius: 18px;
+}
+
+.alarm span {
+    padding: 15px;
+}
+
+.alarm input {
+    font-size: 1.2rem;
+    width: 180px;
+    border: 0;
+    border-radius: 5px;
+    padding: 4px;
+    background: #ffffff33;
+    backdrop-filter: blur(20px);
+    outline: none;
+}
+
+.alarm select {
+    font-size: 2rem;
+    border: 0;
+    border-radius: 5px;
+    padding: 4px;
+    background: #ffffff33;
+    backdrop-filter: blur(20px);
+    cursor: pointer;
+    outline: none;
+}
+
+.alarm option {
+    font-size: 1rem;
+}
+
+.alarm select::after {
+    content: 'H';
+    position: absolute;
+    width: auto;
+    height: auto;
+}
+
+.alarm_Inputs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.alarm form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+.alarm button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: .9;
+    color: white;
+    background: rgb(84,158,252);
+    background: linear-gradient(180deg, rgba(84,158,252,1) 0%, rgba(2,101,228,1) 100%);
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#alarm_List {
+    width: 90%;
+    overflow-y: scroll;
+    overflow: overlay;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.alarm_Object {
+    /* margin-bottom: 5px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 5px 0;
+}
+
+.alarm_Object:nth-child(odd) {
+    background-color: #ffffff11;
+}
+
+.alarm_objectTitle {
+    display: flex;
+    flex-direction: column;
+    line-height: 0px;
+}
+
+.alarm_objectTitle span:nth-child(1) {
+    display: block;
+    width: 380px;
+    color: #00000099;
+    font-size: 1rem;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.alarm_objectTitle span:nth-child(2) {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.alarm_Object i {
+    color: #00000088;
+    padding-right: 15px;
+    cursor: pointer;
+}
+
+.alarm_Alert {
+    display: none;
+    position: absolute;
+    color: white;
+    background: #000000bb;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+}
+
+.alertContainer h3{
+    font-weight: 500;
+}
+
+.alertContainer h1 {
+    font-weight: 300;
+    margin-bottom: 100px;
+}
+
+.alertContainer span {
+    display: block;
+    background-color: #00000077;
+    margin-top: 20px;
+    width: 130px;
+    padding: 10px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.alertContainer span:nth-child(odd) {
+    display: none;
+    background: orange;
 }
