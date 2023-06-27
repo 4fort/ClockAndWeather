@@ -93,7 +93,7 @@ setInterval(() => {
 },1000)
 
 const alarmDelete = (e) => {
-    let deleteAlarm = alarmsArray.findIndex(el => el.id == e || el.id ==  e.parentElement.id);
+    let deleteAlarm = alarmsArray.findIndex(el => el.id == e || e.parentElement.id);
 
     alarmsArray.splice(deleteAlarm, 1);
     alarmDisplay();
